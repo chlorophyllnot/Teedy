@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="page-header">
+    <h1>申请注册账号</h1>
+  </div>
+
+  <form name="guestRequestForm" ng-submit="submitRequest()" novalidate>
+    <div class="form-group">
+      <label for="username">用户名</label>
+      <input type="text" class="form-control" id="username" ng-model="request.username" required>
+    </div>
+
+    <div class="form-group">
+      <label for="email">邮箱</label>
+      <input type="email" class="form-control" id="email" ng-model="request.email" required>
+    </div>
+
+    <div class="form-group">
+      <label for="password">密码</label>
+      <input type="password" class="form-control" id="password" ng-model="request.password" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary" ng-disabled="guestRequestForm.$invalid">
+      提交申请
+    </button>
+  </form>
+
+  <div class="alert alert-success" ng-if="success">
+    🎉 申请提交成功，请等待管理员审核！
+  </div>
+  <div class="alert alert-danger" ng-if="error">
+    ❌ 申请提交失败，请稍后重试。
+  </div>
+</div>

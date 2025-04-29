@@ -250,6 +250,11 @@
                     <exec executable="grunt" dir="${project.basedir}/src/main/webapp" osfamily="unix" failonerror="true">
                       <arg line="--apiurl=api" />
                     </exec>
+                    <!-- apidoc -->
+                    <exec executable="npx" dir="${project.basedir}/src/main/webapp" osfamily="unix" failonerror="true">
+                      <arg line="apidoc -i ../../main/java/ -o dist/apidoc" />
+                    </exec>
+
                   </target>
                 </configuration>
                 <goals>
@@ -264,6 +269,15 @@
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-war-plugin</artifactId>
             <configuration>
+<!--              <webResources>-->
+<!--                <resource>-->
+<!--                  <directory>${project.basedir}/src/main/webapp/apidoc</directory>-->
+<!--                  <targetPath>apidoc</targetPath>-->
+<!--                  <includes>-->
+<!--                    <include>**/*.*</include>-->
+<!--                  </includes>-->
+<!--                </resource>-->
+<!--              </webResources>-->
               <warSourceDirectory>${project.basedir}/src/main/webapp/dist</warSourceDirectory>
               <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
             </configuration>
@@ -272,4 +286,20 @@
       </build>
     </profile>
   </profiles>
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>3.9.0</version>
+      </plugin>
+    </plugins>
+  </reporting>
+
+  <distributionManagement>
+    <site>
+      <id>local</id>
+      <url>file://${project.build.directory}/site</url>
+    </site>
+  </distributionManagement>
 </project>
