@@ -1,5 +1,8 @@
 pipeline {
     agent any 
+    tools {
+        maven "Maven-3.9.9" // 确保这里使用的是你在 Jenkins 中配置的 Maven 名称
+    }
 
     stages {
         stage('Clean') {
